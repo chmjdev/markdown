@@ -15,6 +15,6 @@ Scope: static markdown user guide and real signed Mac download, not a hosted edi
 - [x] Source/asset inspection and public MIT repository push; GitHub reports PUBLIC and MIT.
 - [x] JCDS standards clean. Release covers the public guide and notarized app.
 - [x] Public HTTPS page, health route, preview download/checksum verification, and pushed deployment registry.
-- [ ] Final notarized download verified after deployment.
+- [x] Final notarized download retrieved over HTTPS after deployment; SHA-256 e509054f4c00f1be231140d765f52779e97bd84378692dce62b51b0a16d277c0 matches local release. ZIP integrity passed. Both screenshots HTTP 200; health route HTTP 200.
 
 Developer ID certificate created through Xcode after user account sign-in. Hardened-runtime universal archive succeeded and was uploaded via Direct Distribution to Apple notary service, submission 92D8D50B-A80F-456F-845F-40BF99AB84AD. Apple accepted the submission. Exported app passed codesign, stapler, spctl and both-architecture validation.
