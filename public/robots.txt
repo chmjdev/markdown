@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://markdown.pltfm.ai/sitemap.xml

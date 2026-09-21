@@ -1,0 +1,42 @@
+name: markdown
+options:
+  deploymentTarget:
+    macOS: '13.0'
+settings:
+  base:
+    PRODUCT_BUNDLE_IDENTIFIER: app.jola.markdown
+    PRODUCT_NAME: markdown
+    SWIFT_VERSION: '5.0'
+    ARCHS: arm64 x86_64
+    ONLY_ACTIVE_ARCH: NO
+    MACOSX_DEPLOYMENT_TARGET: '13.0'
+    CODE_SIGN_STYLE: Manual
+    DEVELOPMENT_TEAM: 7H64C3G53A
+    CODE_SIGN_IDENTITY: Developer ID Application
+    ENABLE_HARDENED_RUNTIME: YES
+    ENABLE_APP_SANDBOX: NO
+    CODE_SIGN_INJECT_BASE_ENTITLEMENTS: NO
+    INFOPLIST_FILE: Info.plist
+    GENERATE_INFOPLIST_FILE: NO
+targets:
+  markdown:
+    type: application
+    platform: macOS
+    sources:
+      - Sources
+      - path: build/markdown.app/Contents/Resources/web
+        type: folder
+        buildPhase: resources
+      - path: build/markdown.app/Contents/Resources/AppIcon.icns
+        buildPhase: resources
+      - path: LICENSE.txt
+        buildPhase: resources
+      - path: THIRD-PARTY-NOTICES.txt
+        buildPhase: resources
+schemes:
+  markdown:
+    build:
+      targets:
+        markdown: all
+    archive:
+      config: Release

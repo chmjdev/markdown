@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@toast-ui/editor": "3.2.2",
+    "esbuild": "0.25.12"
+  },
+  "name": "markdown",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "bash build.sh",
+    "lint": "node --check web/editor.js",
+    "start": "open build/markdown.app",
+    "dev": "bash build.sh && open build/markdown.app",
+    "guide:dev": "bash start.sh dev",
+    "guide:check": "python3 scripts/check_guide.py"
+  },
+  "author": "Charles Majola",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chmjdev/markdown.git"
+  }
+}

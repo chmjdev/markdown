@@ -1,0 +1,18 @@
+html, body { height:100%; margin:0; overflow:hidden; background:#faf9f6; }
+body { font-family:-apple-system,BlinkMacSystemFont,sans-serif; }
+#editor { height:calc(100% - 29px) !important; }
+#status { height:28px; border-top:1px solid #e6e3de; display:flex; align-items:center; justify-content:space-between; padding:0 18px; font-size:11px; color:#77756f; background:#f6f5f2; }
+.toastui-editor-defaultUI { border:0; font-family:inherit; }
+.toastui-editor-defaultUI-toolbar { background:#f6f5f2; border-bottom:1px solid #e6e3de; padding:0 14px; }
+.toastui-editor-ww-container { background:#faf9f6; }
+.toastui-editor-ww-container .toastui-editor-contents { max-width:800px; margin:0 auto; padding:40px 48px 90px; box-sizing:border-box; font-family:-apple-system,BlinkMacSystemFont,sans-serif; font-size:16px; line-height:1.75; color:#282923; }
+.toastui-editor-contents h1 { font-size:34px; border:0; letter-spacing:-.8px; }
+.toastui-editor-contents h2 { font-size:26px; border:0; letter-spacing:-.4px; }
+.toastui-editor-contents h3 { font-size:21px; }
+.toastui-editor-contents p { margin:10px 0; }
+.toastui-editor-contents blockquote { border-left:3px solid #6d8574; color:#61665d; padding-left:18px; }
+.toastui-editor-contents pre { background:#efeee9; border-radius:8px; }
+.toastui-editor-contents code { font-family:ui-monospace,SFMono-Regular,monospace; }
+.toastui-editor-mode-switch { background:#f6f5f2; border-color:#e6e3de; }
+.toastui-editor-md-container { background:#faf9f6; }
+@media(max-width:600px) { .toastui-editor-ww-container .toastui-editor-contents { padding:24px; } }
