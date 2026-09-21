@@ -4,7 +4,7 @@ Name: markdown — visual editor
 Subtitle: Write visually. Keep the text.
 Bundle: app.jola.markdown.ios
 SKU: markdown-ios-100
-Version: 1.0.0 (1)
+Version: 1.0.0 (2)
 Primary language: English (U.K.)
 Category: Productivity
 Price: Free
@@ -39,5 +39,9 @@ No sign-in or purchase required. Tap Welcome to open a sample document, or use t
 ## Privacy facts
 No app or third-party collection, tracking, advertising or analytics. Bundled TOAST UI usageStatistics is false. CSP blocks network images and connections. Files provider sync and explicit system sharing are user-directed OS features.
 
-## Outstanding account declarations
-Review contact details and EU trader status require verified account/user information. Do not invent them. Submission stage is not complete until App Store Connect confirms Submitted for Review.
+## Distribution setup
+App Store Connect app ID: 6814380491. Initial availability excludes all 27 EU countries; 148 territories are selected. Automatic availability in future territories is off. This is a distribution choice, not a legal declaration of non-trader status.
+
+The user-confirmed private App Review contact is stored only in App Store Connect. No contact phone or email is committed here. Public price is free; primary category Productivity; calculated age rating 4+. The published privacy label is Data Not Collected. iOS-on-Mac and Apple Vision Pro availability are off because those variants have not been validated.
+
+Build 1 uploaded successfully on 2026-09-21. Build 2 corrects initial visual scroll position, passed iPhone/iPad workflow checks and uploaded successfully. This file must not be read as evidence of Apple review submission or approval; see release-status.md for the last verified stage.

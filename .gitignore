@@ -6,3 +6,9 @@ build/
 !.env.example
 .pids.json
 markdown.xcodeproj/
+
+ios/markdown-iOS.xcodeproj/
+ios/Resources/web/
+ios/build/
+ios/*.log
+ios/build-device/

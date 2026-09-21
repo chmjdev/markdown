@@ -2,7 +2,7 @@
 
 Created by **Charles Majola** ([chmjdev](https://github.com/chmjdev)). Free and open source under the [MIT License](LICENSE.txt). Use, copy, modify, and distribute it with the license and author copyright notice retained.
 
-A local macOS Markdown document editor. Native Swift/AppKit document windows wrap a bundled TOAST UI Editor. No server, account, or network connection is required for text editing. Linked remote images can load from their original URLs.
+A local Markdown document editor for macOS, iPhone and iPad. The Mac application uses native Swift/AppKit document windows around a bundled TOAST UI Editor. No server, account, or network connection is required for text editing. Linked remote images can load from their original URLs.
 
 ## Use
 
@@ -56,3 +56,19 @@ The guide is served at https://markdown.pltfm.ai through JCDS. Its deployment is
 - Deploy: `jcds remote deploy <configured-host> <project-path> prod --latest` after the PREGOLIVE gate. Do not run production launch commands by hand.
 
 The public binary is signed with Developer ID, notarized by Apple, and includes a stapled ticket. The source is public at https://github.com/chmjdev/markdown under MIT. Dependencies retain their notices in `THIRD-PARTY-NOTICES.txt`.
+
+## iPhone and iPad
+
+The native iOS app targets iOS/iPadOS 17 or later. It uses the system Files document browser, UIDocument saving, a bundled visual editor, and a native source editor. Documents save automatically; Save and Done also save. Share exports a copy of current text, including when the original location cannot be saved.
+
+The iOS editor works offline, blocks remote document images and links, and has no accounts, ads, analytics or tracking. Cloud synchronization is handled only by the Files provider the user chooses. Visual editing can normalize Markdown; Source preserves exact UTF-8 text.
+
+Build with Xcode, Node.js and XcodeGen:
+
+```sh
+npm ci
+bash scripts/build-ios.sh
+open ios/markdown-iOS.xcodeproj
+```
+
+Use the `markdown-iOS` scheme. Select your own Apple development team for signing. The project is generated from `ios/project.yml`; generated Xcode files and build output are ignored. UI checks live in `ios/Tests/EditorTests.swift`. Submission metadata and release evidence live in `ios/AppStore/`. App Store availability depends on Apple review; an uploaded build is not a released app.
