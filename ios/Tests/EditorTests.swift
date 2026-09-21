@@ -1,5 +1,58 @@
 import XCTest
 final class EditorTests: XCTestCase {
+    func testAboutPrivacyAndSupportNavigation() throws {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["About markdown"].waitForExistence(timeout: 60))
+        app.buttons["About markdown"].tap()
+        XCTAssertTrue(app.buttons["Privacy policy"].waitForExistence(timeout: 10))
+        app.buttons["Privacy policy"].tap()
+        XCTAssertTrue(app.webViews.staticTexts["Your words belong to you."].waitForExistence(timeout: 60))
+        let privacy = XCTAttachment(screenshot: app.screenshot())
+        privacy.name = "Privacy page opened from About"
+        privacy.lifetime = .keepAlways
+        add(privacy)
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.buttons["About markdown"].waitForExistence(timeout: 60))
+        app.buttons["About markdown"].tap()
+        XCTAssertTrue(app.buttons["Support"].waitForExistence(timeout: 10))
+        app.buttons["Support"].tap()
+        XCTAssertTrue(app.webViews.staticTexts["A little help with markdown."].waitForExistence(timeout: 60))
+        XCTAssertTrue(app.webViews.links["chmjdev@gmail.com"].exists)
+        let support = XCTAttachment(screenshot: app.screenshot())
+        support.name = "Support page opened from About"
+        support.lifetime = .keepAlways
+        add(support)
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(app.buttons["Welcome"].waitForExistence(timeout: 10))
+    }
+    func testNativeCreationAndSave() throws {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["Create Document"].waitForExistence(timeout: 60))
+        app.buttons["Create Document"].tap()
+        let sourceButton = app.buttons["Source"]
+        XCTAssertTrue(sourceButton.waitForExistence(timeout: 60))
+        expectation(for: NSPredicate(format: "enabled == true"), evaluatedWith: sourceButton)
+        waitForExpectations(timeout: 30)
+        sourceButton.tap()
+        let source = app.textViews["Markdown source"]
+        XCTAssertTrue(source.waitForExistence(timeout: 10))
+        XCTAssertEqual(source.value as? String, "")
+        source.tap()
+        source.typeText("# Native Files check\n\nCreated, saved and reopened — café.")
+        app.toolbars.buttons["Hide keyboard"].tap()
+        app.buttons["Save"].tap()
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH 'Saved ·'")).firstMatch.waitForExistence(timeout: 10))
+        app.buttons["Done"].tap()
+        XCTAssertTrue(app.buttons["Welcome"].waitForExistence(timeout: 10))
+        let browser = XCTAttachment(string: app.debugDescription)
+        browser.name = "Created document browser"
+        browser.lifetime = .keepAlways
+        add(browser)
+    }
     func testCaptureStoreScreenshots() throws {
         let app = XCUIApplication()
         app.launch()

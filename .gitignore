@@ -12,3 +12,5 @@ ios/Resources/web/
 ios/build/
 ios/*.log
 ios/build-device/
+
+ios/build-review/

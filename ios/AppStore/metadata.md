@@ -4,7 +4,7 @@ Name: markdown — visual editor
 Subtitle: Write visually. Keep the text.
 Bundle: app.jola.markdown.ios
 SKU: markdown-ios-100
-Version: 1.0.0 (2)
+Version: 1.0.0 (3)
 Primary language: English (U.K.)
 Category: Productivity
 Price: Free
@@ -34,7 +34,7 @@ Source code: https://github.com/chmjdev/markdown
 markdown,editor,notes,writing,text,reader,offline,files,source,document
 
 ## Review notes
-No sign-in or purchase required. Tap Welcome to open a sample document, or use the native document browser to create/open UTF-8 .md/.markdown files. Visual and Source are above the editor. Changes save automatically and Done saves before closing. App bundles its editor locally; no remote application code or content service is used. Remote document images are blocked on iOS. MIT source and dependency notices are included in About.
+No sign-in or purchase required. Tap Welcome to open a sample document, or use the native document browser to create/open UTF-8 .md/.markdown files. Visual and Source are above the editor. Changes save automatically and Done saves before closing. App bundles its editor locally; no remote application code or content service is used. Remote document images are blocked on iOS. The information button opens About, with native Privacy policy and Support buttons. Both open the public website in an in-app Safari browser. MIT source and dependency notices are included in About.
 
 ## Privacy facts
 No app or third-party collection, tracking, advertising or analytics. Bundled TOAST UI usageStatistics is false. CSP blocks network images and connections. Files provider sync and explicit system sharing are user-directed OS features.

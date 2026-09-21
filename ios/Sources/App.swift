@@ -1,6 +1,7 @@
 import UIKit
 import WebKit
 import UniformTypeIdentifiers
+import SafariServices
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -329,7 +330,7 @@ final class EditorController: UIViewController, WKScriptMessageHandler, WKNaviga
     }
 }
 
-final class AboutController: UIViewController {
+final class AboutController: UIViewController, SFSafariViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "About markdown"
@@ -337,15 +338,43 @@ final class AboutController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(close))
         let text = UITextView()
         text.isEditable = false
+        text.dataDetectorTypes = [.link]
         text.font = .preferredFont(forTextStyle: .body)
         text.adjustsFontForContentSizeCategory = true
         text.textContainerInset = UIEdgeInsets(top: 24, left: 20, bottom: 30, right: 20)
         let license = Bundle.main.url(forResource: "LICENSE", withExtension: "txt").flatMap { try? String(contentsOf: $0) } ?? ""
         let notices = Bundle.main.url(forResource: "THIRD-PARTY-NOTICES", withExtension: "txt").flatMap { try? String(contentsOf: $0) } ?? ""
-        text.text = "markdown\nBy Charles Majola\nFree and open source · MIT License\n\nWrite visually. Keep your Markdown.\n\nUse the + button in Files to create a document. Open .md or .markdown files from On My iPhone, iCloud Drive or another Files provider. Changes save automatically; Save and Done also save immediately. Share sends a copy through the iOS share sheet.\n\nYour privacy\nNo account, ads, analytics or tracking. Documents are handled on your device and saved to the Files location you choose. Your Files provider may sync them. Remote images and links do not load in the editor.\n\nGood to know\nVisual editing can normalize Markdown. Custom syntax, raw HTML and YAML may change in visual mode; use Source for exact text. Only UTF-8 files are supported.\n\nSupport: https://github.com/chmjdev/markdown/issues\nPrivacy: https://markdown.pltfm.ai/privacy.html\n\n\(license)\n\n\(notices)"
+        text.text = "markdown\nBy Charles Majola\nFree and open source · MIT License\n\nWrite visually. Keep your Markdown.\n\nUse the + button in Files to create a document. Open .md or .markdown files from On My iPhone, iCloud Drive or another Files provider. Changes save automatically; Save and Done also save immediately. Share sends a copy through the iOS share sheet.\n\nYour privacy\nNo account, ads, analytics or tracking. Documents are handled on your device and saved to the Files location you choose. Your Files provider may sync them. Remote images and links do not load in the editor.\n\nGood to know\nVisual editing can normalize Markdown. Custom syntax, raw HTML and YAML may change in visual mode; use Source for exact text. Only UTF-8 files are supported.\n\nSupport: https://markdown.pltfm.ai/support.html\nPrivacy: https://markdown.pltfm.ai/privacy.html\n\n\(license)\n\n\(notices)"
+        let privacy = UIButton(type: .system)
+        privacy.setTitle("Privacy policy", for: .normal)
+        privacy.addAction(UIAction { [weak self] _ in self?.openPage("https://markdown.pltfm.ai/privacy.html") }, for: .touchUpInside)
+        let support = UIButton(type: .system)
+        support.setTitle("Support", for: .normal)
+        support.addAction(UIAction { [weak self] _ in self?.openPage("https://markdown.pltfm.ai/support.html") }, for: .touchUpInside)
+        let links = UIStackView(arrangedSubviews: [privacy, support])
+        links.axis = .horizontal
+        links.distribution = .fillEqually
+        links.translatesAutoresizingMaskIntoConstraints = false
         text.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(links)
         view.addSubview(text)
-        NSLayoutConstraint.activate([text.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor), text.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor), text.leadingAnchor.constraint(equalTo: view.leadingAnchor), text.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
+        NSLayoutConstraint.activate([
+            links.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            links.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            links.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            links.heightAnchor.constraint(greaterThanOrEqualToConstant: 48),
+            text.topAnchor.constraint(equalTo: links.bottomAnchor),
+            text.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            text.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            text.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
+    private func openPage(_ address: String) {
+        guard let url = URL(string: address) else { return }
+        let browser = SFSafariViewController(url: url)
+        browser.delegate = self
+        present(browser, animated: true)
+    }
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) { controller.dismiss(animated: true) }
     @objc func close() { dismiss(animated: true) }
 }

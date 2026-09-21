@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@toast-ui/editor": "3.2.2",
+    "dompurify": "3.4.15",
     "esbuild": "0.25.12"
   },
   "name": "markdown",
@@ -19,5 +20,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/chmjdev/markdown.git"
+  },
+  "overrides": {
+    "dompurify": "$dompurify"
   }
 }

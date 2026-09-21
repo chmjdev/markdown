@@ -72,3 +72,5 @@ open ios/markdown-iOS.xcodeproj
 ```
 
 Use the `markdown-iOS` scheme. Select your own Apple development team for signing. The project is generated from `ios/project.yml`; generated Xcode files and build output are ignored. UI checks live in `ios/Tests/EditorTests.swift`. Submission metadata and release evidence live in `ios/AppStore/`. App Store availability depends on Apple review; an uploaded build is not a released app.
+
+The iOS web build replaces TOAST UI 3.2.2's embedded DOMPurify 2.3.3 with the pinned DOMPurify 3.4.15 dependency through `scripts/build-ios-web.mjs`. It fails if the expected upstream boundary or final sanitizer version changes. Review that integration when upgrading the editor. Privacy and Support are available as native buttons in About. Existing Mac downloads are separate signed artifacts and are not rebuilt by the iOS script.
