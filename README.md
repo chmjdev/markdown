@@ -30,7 +30,7 @@ bash install.sh
 open /Applications/markdown.app
 ```
 
-Quit markdown before rebuilding or reinstalling. Build output is always `build/markdown.app`. The installer removes only existing apps with this project's bundle identifier before copying the new bundle to `/Applications`. It refuses to overwrite an unrelated app at the destination. The universal preview bundle is ad-hoc signed. It is not Developer ID signed or notarized; Gatekeeper rejects it as a trusted public release. Apple Silicon has been run-tested; Intel has only been cross-compiled. A Developer ID Application certificate and notarization credentials are needed for trusted distribution.
+Quit markdown before rebuilding or reinstalling. Build output is always `build/markdown.app`. The installer removes only existing apps with this project's bundle identifier before copying the new bundle to `/Applications`. It refuses to overwrite an unrelated app at the destination. Local builds are ad-hoc signed. The public 1.0.0 release is Developer ID signed, Apple-notarized, and stapled. Apple Silicon has been run-tested; Intel has only been cross-compiled. Releasing your own signed build requires your Apple Developer account and signing identity.
 
 ## Document behavior
 
@@ -50,8 +50,9 @@ The guide is served at https://markdown.pltfm.ai through JCDS. Its deployment is
 
 - Local guide: `npm run guide:dev` (port read from `jcds.config`).
 - Guide checks: `npm run guide:check`.
-- Package: `bash scripts/package.sh` builds a universal preview ZIP and SHA-256 file under `public/downloads/`.
-- App download: https://markdown.pltfm.ai/downloads/markdown-1.0.0-universal-preview.zip
+- Local preview: `bash scripts/package.sh` builds an ad-hoc universal ZIP.
+- Signed release: `bash scripts/archive.sh`, distribute through Xcode Organizer using Direct Distribution, and export after Apple notarization succeeds. Run `bash scripts/release.sh /path/to/markdown.app` to verify signature, ticket, Gatekeeper and architectures before packaging.
+- App download: https://markdown.pltfm.ai/downloads/markdown-1.0.0-universal.zip
 - Deploy: `jcds remote deploy <configured-host> <project-path> prod --latest` after the PREGOLIVE gate. Do not run production launch commands by hand.
 
-The binary is supplied as an explicitly labeled unnotarized preview. No Developer ID Application identity was available when packaging. The source is public at https://github.com/chmjdev/markdown under MIT. Dependencies retain their notices in `THIRD-PARTY-NOTICES.txt`.
+The public binary is signed with Developer ID, notarized by Apple, and includes a stapled ticket. The source is public at https://github.com/chmjdev/markdown under MIT. Dependencies retain their notices in `THIRD-PARTY-NOTICES.txt`.

@@ -1,0 +1,1 @@
+Signed release check — markdown 1.0.0

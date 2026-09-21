@@ -1,7 +1,7 @@
 from pathlib import Path
-import hashlib, re
+import hashlib, re, sys
 root = Path(__file__).resolve().parent.parent
-archive = root / 'public/downloads/markdown-1.0.0-universal-preview.zip'
+archive = root / (sys.argv[1] if len(sys.argv) > 1 else 'public/downloads/markdown-1.0.0-universal-preview.zip')
 digest = hashlib.sha256(archive.read_bytes()).hexdigest()
 page = root / 'public/index.html'
 text = page.read_text()

@@ -1,7 +1,8 @@
 # markdown release plan
 
-1. Publish and verify the responsive guide, public MIT repository, and real universal preview download through JCDS.
-2. Once the user signs in to their paid Apple Developer team in Xcode, create or download a Developer ID Application certificate, sign, notarize, staple, reassess Gatekeeper, and replace the preview download with a trusted release.
-3. Validate on an Intel Mac and the minimum supported macOS version before claiming runtime support for those combinations.
+1. Completed: public responsive guide, real screenshots, MIT repository, JCDS production deployment and pushed registry.
+2. Completed: Developer ID universal archive, Apple notarization, stapled export and Gatekeeper acceptance.
+3. Finish: install and launch the signed release, publish final ZIP and verify the production download checksum.
+4. Future validation: Intel Mac and minimum supported macOS version before claiming runtime testing on those combinations.
 
 No web document editing, cloud storage, or authentication is planned for the guide.

@@ -20,3 +20,9 @@ Verified on this Apple Silicon Mac using Xcode 26.6 / Swift 6.3.3 and native acc
 `python3 tests/check_saved.py` validates the retained outputs from the UI session, including common formatting and unchanged-file bytes. It is an evidence check, not an automated driver for the app UI.
 
 Not verified: distribution/notarization on other Macs, Intel compatibility, accessibility with VoiceOver, advanced/custom Markdown dialects, or relative-image rendering. These are outside this local initial build.
+
+## Signed release validation — 2026-09-21
+
+Apple notarization accepted submission `92D8D50B-A80F-456F-845F-40BF99AB84AD`. Xcode exported a Developer ID signed universal app with hardened runtime and stapled ticket. Both the installed app and ZIP-extracted app passed `codesign --verify --deep --strict`, `xcrun stapler validate`, and `spctl --assess --type execute` (accepted, Notarized Developer ID). Both arm64 and x86_64 slices are present.
+
+The signed app launched from /Applications, created a new document, and saved the exact text in `signed-release.md` using Command-S. Fresh Launch Services checks resolved both .md and .markdown defaults to /Applications/markdown.app. Intel and macOS 13 runtime tests remain unperformed.
