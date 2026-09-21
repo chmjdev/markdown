@@ -5,3 +5,5 @@
 .author{font-size:13px;color:#586c50;margin-top:-7px}.source-button{display:inline-block;font-size:13px;margin:15px 0 0 20px}@media(max-width:750px){.source-button{margin-left:0}}
 
 .app-shot{margin:28px 0 32px}.app-shot img{display:block;width:100%;height:auto;border:1px solid #d5d9ce;border-radius:7px;box-shadow:0 12px 35px #263f3310}.app-shot figcaption{font-size:12px;color:#61705b;margin-top:12px}.app-shot a{display:block}
+
+.content-page{max-width:800px;margin:auto;padding:40px 24px}.content-page h2{margin:36px 0 18px}
