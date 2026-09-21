@@ -3,3 +3,5 @@
 .download{margin-top:28px}.download-button{display:inline-flex;align-items:center;justify-content:center;gap:35px;background:#263f33;color:#fffefa;padding:13px 21px;border-radius:6px;text-decoration:none;font-size:15px;font-weight:650;min-height:48px}.download-button:hover{background:#3c5a43}.download>p{font-size:12px;color:#5b6954;margin:12px 0}.download .release-warning{max-width:650px;color:#70552b;font-size:13px;line-height:1.65}.checksum{max-width:650px;margin-top:18px;font-size:12px;padding:12px 0}.checksum code{display:block;word-break:break-all;margin-top:14px;padding:12px}.checksum p{padding-left:0}@media(max-width:750px){.download-button{width:100%;gap:15px}.download>p{font-size:11px}}
 
 .author{font-size:13px;color:#586c50;margin-top:-7px}.source-button{display:inline-block;font-size:13px;margin:15px 0 0 20px}@media(max-width:750px){.source-button{margin-left:0}}
+
+.app-shot{margin:28px 0 32px}.app-shot img{display:block;width:100%;height:auto;border:1px solid #d5d9ce;border-radius:7px;box-shadow:0 12px 35px #263f3310}.app-shot figcaption{font-size:12px;color:#61705b;margin-top:12px}.app-shot a{display:block}

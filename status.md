@@ -6,4 +6,4 @@ Public guide and universal preview ZIP are implemented locally; production is no
 
 Author: Charles Majola (@chmjdev), verified from public GitHub profile and git identity. Source uses MIT with dependency notices preserved.
 
-Trusted distribution signing is pending Apple-account sign-in in Xcode. No Developer ID identity is currently installed. The current ZIP is an explicitly labeled ad-hoc preview; Intel code is cross-compiled but not runtime-tested.
+Developer ID certificate is now installed, universal archive is signed with hardened runtime, and Apple notarization submission 92D8D50B-A80F-456F-845F-40BF99AB84AD is Processing. The current ZIP is an explicitly labeled ad-hoc preview; Intel code is cross-compiled but not runtime-tested.

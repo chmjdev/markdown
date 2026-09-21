@@ -12,8 +12,8 @@ Scope: static markdown user guide and real Mac preview download, not a hosted ed
 - [x] Universal arm64/x86_64 build, ZIP integrity/extraction and code-signature verification.
 - [x] Distribution limitation disclosed next to download: ad-hoc signed, not notarized, Gatekeeper rejected. Intel slice built but not runtime-tested.
 - [x] Desktop 1440px and mobile 375px guide checked in browser; no horizontal overflow, all eight navigation targets and download/license links present. Download metadata matches local archive.
-- [ ] Source/asset inspection and public MIT repository push.
-- [ ] JCDS standards clean and release marked before deploy.
+- [x] Source/asset inspection and public MIT repository push; GitHub reports PUBLIC and MIT.
+- [x] JCDS standards clean. Release mark covers the public guide and transparently labeled preview; trusted app notarization remains in progress.
 - [ ] Public HTTPS page, health route, download/checksum verification, and pushed deployment registry.
 
-Trusted public app signing remains a separate blocker: Xcode currently has no signed-in account; user action is needed to sign in to the paid developer team. An Apple Development certificate is not a Developer ID Application certificate. No security bypass is part of these instructions.
+Developer ID certificate created through Xcode after user account sign-in. Hardened-runtime universal archive succeeded and was uploaded via Direct Distribution to Apple notary service, submission 92D8D50B-A80F-456F-845F-40BF99AB84AD. Result is pending; no trusted release claim is made yet.
