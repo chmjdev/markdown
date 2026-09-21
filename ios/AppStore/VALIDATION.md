@@ -27,3 +27,7 @@ Private review contact details and signing secrets are not stored in this reposi
 ## Build 3 pre-distribution audit
 
 See APPLE-REVIEW-AUDIT.md for requirement applicability and official references. Review-iPad.xcresult passed all5 UI tests (Privacy/Support, screenshots/share, native creation/save, source Unicode/undo/redo/save/reopen, visual editing/save/reopen). iPhone document regressions passed in Review-iPhone-Final.xcresult; Review-Native-iPhone.xcresult passed the two navigation/native creation tests. Review-Physical.xcresult passed Privacy and Support opening on iPhone16Pro iOS27. Additional physical document tests awaited an unlocked device. Native iPad creation was also verified by exact saved bytes and reopening through Files; portrait and landscape inspected. DOMPurify3.4.15 replaces the editor’s embedded2.3.3 in the iOS bundle; npm audit0. Live site corrected via JCDS8ff3f49 and all8 tested publicroutes returned200; Mac ZIP SHA unchanged.
+
+## Final build 3 distribution validation
+
+Archive and export/upload succeeded on 21 September 2026; Apple processing Complete and build 3 Ready to Submit. Package identity, device families, OS minimum, signature, privacy manifest, bundled editor and licenses verified. Physical Privacy/Support navigation passed on iPhone 16 Pro / iOS 27; extra physical document tests were blocked by existing Files Face ID protection and stopped without bypass. Simulator document checks and all five iPad tests passed; physical editing is not claimed as verified. See release-status.md for actual review status.

@@ -1,16 +1,17 @@
 # iOS App Store release status
 
-Verified 2026-09-21 at 10:23 SAST (Africa/Johannesburg).
+Verified 2026-09-21 at 12:15 SAST (Africa/Johannesburg).
 
-**Submitted to Apple App Review; Waiting for Review. Not yet approved or live.**
+**Version 1.0.0 build 3 submitted to Apple App Review; Waiting for Review. Not approved or live.**
 
 - App: markdown — visual editor
 - App Store Connect ID: 6814380491
 - Bundle: app.jola.markdown.ios
-- Version / build: 1.0.0 (2)
-- Submission ID: a7556e93-aa1e-41e6-b520-e527a998c074
-- Evidence: App Store Connect displayed “1 Item Submitted”, “Draft Submissions (0)” and “1.0.0 Waiting for Review” after Submit for Review.
-- Review page: https://appstoreconnect.apple.com/apps/6814380491/distribution/reviewsubmissions/details/a7556e93-aa1e-41e6-b520-e527a998c074
+- Version / build: 1.0.0 (3)
+- Submission ID: 2fc47b90-bbe9-461c-9741-acb0be1a7ea5
+- Evidence: App Store Connect displayed “1 Item Submitted” and “Draft Submissions (0)”. The submission details confirm “1.0.0 (3)”, “Waiting for Review” and 21 September 2026 at 12:15 PM.
+- Review page: https://appstoreconnect.apple.com/apps/6814380491/distribution/reviewsubmissions/details/2fc47b90-bbe9-461c-9741-acb0be1a7ea5
+- Previous build 2 submission a7556e93-aa1e-41e6-b520-e527a998c074 was canceled and replaced after the audit.
 - Automatic release after approval is selected.
 - Initial distribution: 148 countries/regions, excluding all 27 EU member countries; future-territory auto-enrollment disabled. No trader-status attestation was submitted.
 - Free price; Productivity; English (U.K.); 4+ rating; published Data Not Collected privacy label.

@@ -45,3 +45,5 @@ App Store Connect app ID: 6814380491. Initial availability excludes all 27 EU co
 The user-confirmed private App Review contact is stored only in App Store Connect. No contact phone or email is committed here. Public price is free; primary category Productivity; calculated age rating 4+. The published privacy label is Data Not Collected. iOS-on-Mac and Apple Vision Pro availability are off because those variants have not been validated.
 
 Build 1 uploaded successfully on 2026-09-21. Build 2 corrects initial visual scroll position, passed iPhone/iPad workflow checks and uploaded successfully. This file must not be read as evidence of Apple review submission or approval; see release-status.md for the last verified stage.
+
+Build 3 includes native Privacy/Support buttons, updated notices and the verified DOMPurify replacement. It uploaded, completed processing and was submitted at 12:15 SAST on 21 September 2026. Current status: Waiting for Review; see release-status.md.
