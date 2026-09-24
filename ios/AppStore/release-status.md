@@ -4,7 +4,7 @@
 
 **Version 1.0.0 build 3 is Rejected under Guideline 2.1 – Information Needed – New App Submission.** App Review's message is dated 2026-09-22 02:28. It reports no defect. Because the developer account has limited App Review history, Apple asks for a physical-device screen recording of the typical flow, starting at launch, and written answers covering purpose and audience, setup, external services, regional differences and regulated material. These go in an App Review reply and in the App Review Information Notes field.
 
-No code change is required, so build 3 stays the build under review. The drafted reply is in review-reply-2026-09-24.md. Status after the reply must be re-verified in App Store Connect; this section does not claim that the reply was sent.
+Apple's message required no code change, but preparing the recording on iOS 27 found three defects (see VALIDATION.md, Build 4). They are fixed in build 4 (1.0.0 (4)), which is intended to replace build 3 when replying. The drafted reply is in review-reply-2026-09-24.md. Status after the reply must be re-verified in App Store Connect; this section does not claim that the reply was sent.
 
 ## Previous status — 21 September 2026
 

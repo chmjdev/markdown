@@ -11,7 +11,7 @@ Hello App Review,
 Thank you for the review. Our answers are below, and a screen recording from a physical iPhone running the latest iOS is attached.
 
 1. Screen recording
-The attached recording starts at app launch and shows the typical user flow: opening the sample Welcome document, editing in Visual mode, switching to Source mode, undo and redo, Save, sharing through the iOS share sheet, tapping Done to return to the Files browser, creating a new document, and opening About with the Privacy Policy and Support pages. The app has no account registration, login or account deletion, no user-generated content shared with other users, and no paid content or in-app purchases.
+The attached recording starts at app launch and shows the typical user flow: opening the sample Welcome document, editing in Visual mode, switching to Source mode, undo and redo, Save, tapping Done to return to the Files browser, creating a new document, and opening About with the Privacy Policy and Support pages. The app has no account registration, login or account deletion, no user-generated content shared with other users, and no paid content or in-app purchases.
 
 2. Purpose and target audience
 markdown is a free, open-source Markdown reader and editor for iPhone and iPad. It is for writers, students, developers and anyone who keeps notes or documentation as plain Markdown (.md/.markdown) files. Markdown text is portable but hard to read and edit on a phone. markdown lets people write on a formatted page (Visual mode) while the file stays ordinary Markdown text (Source mode). Documents stay in Files, on the device or with the Files provider the user chooses.
@@ -22,7 +22,7 @@ No setup, sign-in, credentials or purchase is required. After launch the app sho
 - Visual and Source above the editor switch between the formatted page and the Markdown text. Format, undo, redo and hide keyboard are in the same bar.
 - Changes save automatically. Save saves immediately, Share exports the current text, and Done saves and returns to the browser.
 - In the browser, the create button makes a new Untitled.md, and any existing UTF-8 .md or .markdown file can be opened from Files.
-- The information button (top right) opens About, with Privacy Policy and Support buttons that open our public pages in an in-app Safari view, plus the licence and third-party notices.
+- The information button (ⓘ, next to Welcome) opens About, with Privacy Policy and Support buttons that open our public pages in an in-app Safari view, plus the licence and third-party notices.
 No sample files need to be supplied; the Welcome document is built into the app.
 
 4. External services, tools and platforms

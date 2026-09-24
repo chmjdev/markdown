@@ -5,23 +5,34 @@ import SafariServices
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplication.LaunchOptionsKey: Any]?) -> Bool { true }
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+}
+
+// iOS 27 terminates apps built with its SDK that have not adopted the scene lifecycle.
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions options: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let window = UIWindow(frame: UIScreen.main.bounds)
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = scene as? UIWindowScene else { return }
+        let window = UIWindow(windowScene: windowScene)
         window.tintColor = UIColor(red: 0.18, green: 0.30, blue: 0.23, alpha: 1)
         window.overrideUserInterfaceStyle = .light
         window.rootViewController = BrowserController(forOpening: [UTType(importedAs: "net.daringfireball.markdown")])
         window.makeKeyAndVisible()
         self.window = window
-        return true
+        if let url = connectionOptions.urlContexts.first?.url { reveal(url) }
     }
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        guard let browser = window?.rootViewController as? BrowserController else { return false }
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url { reveal(url) }
+    }
+    func reveal(_ url: URL) {
+        guard let browser = window?.rootViewController as? BrowserController else { return }
         browser.revealDocument(at: url, importIfNeeded: true) { url, error in
             if let error { browser.showError(error) }
             else if let url { browser.openDocument(url) }
         }
-        return true
     }
 }
 
@@ -55,9 +66,10 @@ final class BrowserController: UIDocumentBrowserViewController, UIDocumentBrowse
         allowsDocumentCreation = true
         allowsPickingMultipleItems = false
         browserUserInterfaceStyle = .light
-        additionalLeadingNavigationBarButtonItems = [UIBarButtonItem(title: "Welcome", style: .plain, target: self, action: #selector(welcome))]
-        additionalTrailingNavigationBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(about))]
-        additionalTrailingNavigationBarButtonItems.first?.accessibilityLabel = "About markdown"
+        // Leading items stay visible inside folders; iOS drops trailing app items there, which hid About.
+        let about = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(about))
+        about.accessibilityLabel = "About markdown"
+        additionalLeadingNavigationBarButtonItems = [UIBarButtonItem(title: "Welcome", style: .plain, target: self, action: #selector(welcome)), about]
     }
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler handler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         do {
@@ -73,6 +85,24 @@ final class BrowserController: UIDocumentBrowserViewController, UIDocumentBrowse
     }
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didImportDocumentAt sourceURL: URL, toDestinationURL destinationURL: URL) { openDocument(destinationURL) }
     func documentBrowser(_ controller: UIDocumentBrowserViewController, failedToImportDocumentAt documentURL: URL, error: Error?) {
+        // Creating from Recents (or any place without a destination folder) fails with
+        // DocumentManager error 1. Keep the new document in the app's own folder instead.
+        let temp = FileManager.default.temporaryDirectory.resolvingSymlinksInPath().path
+        if documentURL.resolvingSymlinksInPath().path.hasPrefix(temp) {
+            do {
+                let folder = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                var destination = folder.appendingPathComponent("Untitled.md")
+                var index = 2
+                while FileManager.default.fileExists(atPath: destination.path) {
+                    destination = folder.appendingPathComponent("Untitled \(index).md")
+                    index += 1
+                }
+                // New documents start empty, and the browser may already have removed the temporary file.
+                try Data().write(to: destination, options: .withoutOverwriting)
+                openDocument(destination)
+                return
+            } catch { showError(error); return }
+        }
         if let error { showError(error) }
     }
     @objc func welcome() {

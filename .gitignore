@@ -14,3 +14,4 @@ ios/*.log
 ios/build-device/
 
 ios/build-review/
+ios/build.noindex/

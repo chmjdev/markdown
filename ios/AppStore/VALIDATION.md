@@ -31,3 +31,20 @@ See APPLE-REVIEW-AUDIT.md for requirement applicability and official references.
 ## Final build 3 distribution validation
 
 Archive and export/upload succeeded on 21 September 2026; Apple processing Complete and build 3 Ready to Submit. Package identity, device families, OS minimum, signature, privacy manifest, bundled editor and licenses verified. Physical Privacy/Support navigation passed on iPhone 16 Pro / iOS 27; extra physical document tests were blocked by existing Files Face ID protection and stopped without bypass. Simulator document checks and all five iPad tests passed; physical editing is not claimed as verified. See release-status.md for actual review status.
+
+## Build 4 — 24 September 2026 (App Review information request)
+
+Xcode 27.0 (27A266a), iOS 27.0 SDK. Physical iPhone 16 Pro, iOS 27.0 (24A437); simulators iPhone 17 Pro and iPad Pro 13-inch (M5), iOS 27.
+
+Defects found and fixed while preparing Apple's requested screen recording:
+
+- Launch crash with the iOS 27 SDK. UIKit trapped in `_UIApplicationEvaluateRuntimeIssueForNoSceneLifecycleAdoption` because the app had not adopted the scene lifecycle (crash log markdown-2026-09-24-203441.ips on the iPhone). Build 3, built with the iOS 26.5 SDK, is not subject to this trap. Fixed with a `SceneDelegate` and `UIApplicationSceneManifest`.
+- About (Privacy policy and Support) was unreachable inside any folder: iOS 27 drops trailing app bar items there and does not list them under More. The info button now sits beside Welcome in the leading items and was verified visible inside On My iPhone → markdown.
+- Create Document from Recents failed with DocumentManager error 1 on iPad. The browser now creates the new empty document in the app's own folder and opens it.
+
+Verified:
+
+- iPhone and iPad simulators: all 5 EditorTests UI tests passed on each (Privacy/Support navigation, screenshots/share sheet, native creation and save, source Unicode/undo/redo/save/reopen, visual editing/save/reopen).
+- Physical iPhone, clean install: ReviewWalkthrough passed (launch from the Home Screen, Welcome, visual typing, undo/redo, Source/Visual, Save, Done, new document in Source then Visual, About → Privacy policy → Support). Its XCTest screen recording, trimmed to start on the Home Screen, is the App Review attachment; it is not committed. Its frames were checked for personal data: the share sheet (which shows contacts), other apps and personal Files folders are excluded.
+
+Not verified: iPad on a physical device, iOS 17–26 runtimes with the build 4 binary, VoiceOver and every Files provider.
