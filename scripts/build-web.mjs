@@ -1,12 +1,19 @@
+// Bundles an editor entry point for the Mac or iOS app.
+// Usage: node scripts/build-web.mjs <entry> <outfile>
+// TOAST UI Editor 3.2.2 embeds DOMPurify 2.3.3 in its ESM build. The plugin strips that
+// copy and imports the pinned dompurify dependency instead; the build fails if the
+// embedded sanitizer survives or the pinned version is missing.
 import { build } from 'esbuild';
 import { readFile } from 'node:fs/promises';
+const [entry, outfile] = process.argv.slice(2);
+if (!entry || !outfile) throw new Error('Usage: node scripts/build-web.mjs <entry> <outfile>');
 const start = '/*! @license DOMPurify 2.3.3';
 const end = 'var purify = createDOMPurify();';
 await build({
-  entryPoints: ['ios/Web/editor.js'],
+  entryPoints: [entry],
   bundle: true,
   minify: true,
-  outfile: 'ios/Resources/web/editor.js',
+  outfile,
   loader: { '.woff': 'file', '.ttf': 'file' },
   plugins: [{
     name: 'current-dompurify',
@@ -21,5 +28,5 @@ await build({
     }
   }]
 });
-const output = await readFile('ios/Resources/web/editor.js', 'utf8');
+const output = await readFile(outfile, 'utf8');
 if (output.includes('DOMPurify 2.3.3') || !output.includes('3.4.15')) throw new Error('Unexpected bundled sanitizer version.');

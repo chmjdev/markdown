@@ -18,3 +18,11 @@ Scope: static markdown user guide and real signed Mac download, not a hosted edi
 - [x] Final notarized download retrieved over HTTPS after deployment; SHA-256 e509054f4c00f1be231140d765f52779e97bd84378692dce62b51b0a16d277c0 matches local release. ZIP integrity passed. Both screenshots HTTP 200; health route HTTP 200.
 
 Developer ID certificate created through Xcode after user account sign-in. Hardened-runtime universal archive succeeded and was uploaded via Direct Distribution to Apple notary service, submission 92D8D50B-A80F-456F-845F-40BF99AB84AD. Apple accepted the submission. Exported app passed codesign, stapler, spctl and both-architecture validation.
+
+## Mac 1.0.1 — 24 September 2026
+
+- [x] Sanitizer replaced (DOMPurify 3.4.15, no 2.3.3) and checked against hostile HTML in the release bundle.
+- [x] Developer ID signature, Apple notarization (B15623FD-86E9-4CB3-84EC-5A15CFB35D01), stapled ticket, Gatekeeper acceptance and both architecture slices verified.
+- [x] Installed-app round trip, save and unchanged-bytes checks passed on Apple Silicon. Intel not runtime-tested.
+- [x] Guide checks pass; download link, version text and SHA-256 updated to 1.0.1; 1.0.0 ZIP kept at its URL.
+- [ ] Deployed through JCDS and the public ZIP's SHA-256 verified over HTTPS.

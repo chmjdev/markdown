@@ -6,7 +6,10 @@ MARKDOWN_RELEASE_APP="$1"
 codesign --verify --deep --strict "$MARKDOWN_RELEASE_APP"
 xcrun stapler validate "$MARKDOWN_RELEASE_APP"
 spctl --assess --type execute --verbose=2 "$MARKDOWN_RELEASE_APP"
-lipo "$MARKDOWN_RELEASE_APP/Contents/MacOS/markdown" -verify_arch arm64 x86_64
+# Xcode 27's lipo rejects -verify_arch with multiple architectures; check the list instead.
+MARKDOWN_ARCHS=" $(lipo -archs "$MARKDOWN_RELEASE_APP/Contents/MacOS/markdown") "
+case "$MARKDOWN_ARCHS" in *" arm64 "*) ;; *) printf '%s\n' 'Missing arm64 slice'; exit 1;; esac
+case "$MARKDOWN_ARCHS" in *" x86_64 "*) ;; *) printf '%s\n' 'Missing x86_64 slice'; exit 1;; esac
 mkdir -p public/downloads
 MARKDOWN_VERSION=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$MARKDOWN_RELEASE_APP/Contents/Info.plist")
 MARKDOWN_ARCHIVE="public/downloads/markdown-${MARKDOWN_VERSION}-universal.zip"

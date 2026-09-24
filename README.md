@@ -30,7 +30,7 @@ bash install.sh
 open /Applications/markdown.app
 ```
 
-Quit markdown before rebuilding or reinstalling. Build output is always `build/markdown.app`. The installer removes only existing apps with this project's bundle identifier before copying the new bundle to `/Applications`. It refuses to overwrite an unrelated app at the destination. Local builds are ad-hoc signed. The public 1.0.0 release is Developer ID signed, Apple-notarized, and stapled. Apple Silicon has been run-tested; Intel has only been cross-compiled. Releasing your own signed build requires your Apple Developer account and signing identity.
+Quit markdown before rebuilding or reinstalling. Build output is always `build/markdown.app`. The installer removes only existing apps with this project's bundle identifier before copying the new bundle to `/Applications`. It refuses to overwrite an unrelated app at the destination. Local builds are ad-hoc signed. The public 1.0.1 release is Developer ID signed, Apple-notarized, and stapled. Apple Silicon has been run-tested; Intel has only been cross-compiled. Releasing your own signed build requires your Apple Developer account and signing identity.
 
 ## Document behavior
 
@@ -51,8 +51,8 @@ The guide is served at https://markdown.pltfm.ai through JCDS. Its deployment is
 - Local guide: `npm run guide:dev` (port read from `jcds.config`).
 - Guide checks: `npm run guide:check`.
 - Local preview: `bash scripts/package.sh` builds an ad-hoc universal ZIP.
-- Signed release: `bash scripts/archive.sh`, distribute through Xcode Organizer using Direct Distribution, and export after Apple notarization succeeds. Run `bash scripts/release.sh /path/to/markdown.app` to verify signature, ticket, Gatekeeper and architectures before packaging.
-- App download: https://markdown.pltfm.ai/downloads/markdown-1.0.0-universal.zip
+- Signed release: `bash scripts/archive.sh`, then notarize with Direct Distribution: Xcode Organizer, or `xcodebuild -exportArchive` with `method` `developer-id` and `destination` `upload` followed by `xcodebuild -exportNotarizedApp`. Run `bash scripts/release.sh /path/to/markdown.app` to verify signature, ticket, Gatekeeper and architectures before packaging.
+- App download: https://markdown.pltfm.ai/downloads/markdown-1.0.1-universal.zip (1.0.0 remains at its original URL)
 - Deploy: `jcds remote deploy <configured-host> <project-path> prod --latest` after the PREGOLIVE gate. Do not run production launch commands by hand.
 
 The public binary is signed with Developer ID, notarized by Apple, and includes a stapled ticket. The source is public at https://github.com/chmjdev/markdown under MIT. Dependencies retain their notices in `THIRD-PARTY-NOTICES.txt`.
@@ -73,4 +73,4 @@ open ios/markdown-iOS.xcodeproj
 
 Use the `markdown-iOS` scheme. Select your own Apple development team for signing. The project is generated from `ios/project.yml`; generated Xcode files and build output are ignored. UI checks live in `ios/Tests/EditorTests.swift`. Submission metadata and release evidence live in `ios/AppStore/`. App Store availability depends on Apple review; an uploaded build is not a released app.
 
-The iOS web build replaces TOAST UI 3.2.2's embedded DOMPurify 2.3.3 with the pinned DOMPurify 3.4.15 dependency through `scripts/build-ios-web.mjs`. It fails if the expected upstream boundary or final sanitizer version changes. Review that integration when upgrading the editor. Privacy and Support are available as native buttons in About. Existing Mac downloads are separate signed artifacts and are not rebuilt by the iOS script.
+Both the Mac and iOS web builds go through `scripts/build-web.mjs`, which replaces TOAST UI 3.2.2's embedded DOMPurify 2.3.3 with the pinned DOMPurify 3.4.15 dependency. It fails if the expected upstream boundary or final sanitizer version changes. Review that integration when upgrading the editor. Mac 1.0.0 shipped the embedded 2.3.3; Mac 1.0.1 is the first Mac release with 3.4.15. Privacy and Support are available as native buttons in About.

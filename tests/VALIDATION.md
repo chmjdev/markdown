@@ -26,3 +26,17 @@ Not verified: distribution/notarization on other Macs, Intel compatibility, acce
 Apple notarization accepted submission `92D8D50B-A80F-456F-845F-40BF99AB84AD`. Xcode exported a Developer ID signed universal app with hardened runtime and stapled ticket. Both the installed app and ZIP-extracted app passed `codesign --verify --deep --strict`, `xcrun stapler validate`, and `spctl --assess --type execute` (accepted, Notarized Developer ID). Both arm64 and x86_64 slices are present.
 
 The signed app launched from /Applications, created a new document, and saved the exact text in `signed-release.md` using Command-S. Fresh Launch Services checks resolved both .md and .markdown defaults to /Applications/markdown.app. Intel and macOS 13 runtime tests remain unperformed.
+
+## Mac 1.0.1 release validation — 24 September 2026
+
+Purpose: replace the DOMPurify 2.3.3 that TOAST UI 3.2.2 embeds with the pinned DOMPurify 3.4.15, as the iOS build has done since 21 September. `build.sh` now bundles through `scripts/build-web.mjs`, which is shared with iOS and fails the build if 2.3.3 remains or 3.4.15 is missing.
+
+Built with Xcode 27.0 (27A266a), macOS 27 SDK, minimum macOS 13.0. Version 1.0.1 (2).
+
+- Archive: Developer ID Application (7H64C3G53A), hardened runtime, arm64 + x86_64; the bundled editor contains DOMPurify 3.4.15 and no 2.3.3.
+- Apple notarization accepted submission B15623FD-86E9-4CB3-84EC-5A15CFB35D01. The exported app passed `codesign --verify --deep --strict`, `xcrun stapler validate` and `spctl` (accepted, Notarized Developer ID), and has both architecture slices. `scripts/release.sh` now reads `lipo -archs`, because Xcode 27's `lipo -verify_arch` rejects multiple architectures.
+- Sanitizer, checked in the release bundle's editor: a document with `<script>`, `onerror`, `onmouseover`, a `javascript:` link and an SVG `onbegin` rendered with no script elements, no event-handler attributes, an emptied link and no SVG animation; the page title was not changed and the safe text rendered.
+- Installed to /Applications with the project installer (1.0.0 removed first). In the installed app: the hostile document rendered safely and closed without changes; the round-trip fixture rendered headings, emphasis, links, nested lists, quote, Swift code block, tasks, table and Unicode; after a visual edit, File → Save wrote a file containing every token that `tests/check_saved.py` checks plus the edit; opening and closing an unedited copy left its bytes identical.
+- Release ZIP: markdown-1.0.1-universal.zip, SHA-256 246e85b4c28d1a3003d172e6c4c9ee1baed1950eb85ca30c92b9399e099f4e7b, `unzip -t` passed.
+
+Not verified: Intel runtime, macOS 13–26 runtime with this build, VoiceOver.

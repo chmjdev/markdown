@@ -2,7 +2,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 mkdir -p build/markdown.app/Contents/MacOS build/markdown.app/Contents/Resources/web
-node_modules/.bin/esbuild web/editor.js --bundle --minify --outfile=build/markdown.app/Contents/Resources/web/editor.js --loader:.woff=file --loader:.ttf=file
+node scripts/build-web.mjs web/editor.js build/markdown.app/Contents/Resources/web/editor.js
 cp web/index.html build/markdown.app/Contents/Resources/web/index.html
 swift scripts/icon.swift build/AppIcon.iconset
 iconutil -c icns build/AppIcon.iconset -o build/markdown.app/Contents/Resources/AppIcon.icns
