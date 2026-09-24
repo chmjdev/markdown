@@ -15,4 +15,5 @@ No web document editing, cloud storage, or authentication is planned for the gui
 - [x] Public MIT iOS source and support/privacy pages (JCDS deployment).
 - [x] App Store metadata, private confirmed review contact, free pricing, privacy and non-EU initial territories.
 - [x] Submit version 1.0.0 build 2: Waiting for Review, 2026-09-21 10:23 SAST.
+- [x] Answer Guideline 2.1 Information Needed (2026-09-22) with physical-device recording; fix iOS 27 issues in build 4 and resubmit (2026-09-24).
 - [ ] Apple approval and public App Store availability (external review; not yet complete).

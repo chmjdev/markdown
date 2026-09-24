@@ -10,6 +10,8 @@ Hello App Review,
 
 Thank you for the review. Our answers are below, and a screen recording from a physical iPhone running the latest iOS is attached.
 
+We have also submitted build 1.0.0 (4), which replaces build 3. While preparing the recording on iOS 27 we tested every flow again on physical and simulated devices and fixed three issues. Build 4 adopts the scene lifecycle required for iOS 27. The About button, which opens our Privacy Policy and Support pages, now stays visible inside folders. Creating a document from Recents on iPad now works. The attached recording shows build 4.
+
 1. Screen recording
 The attached recording starts at app launch and shows the typical user flow: opening the sample Welcome document, editing in Visual mode, switching to Source mode, undo and redo, Save, tapping Done to return to the Files browser, creating a new document, and opening About with the Privacy Policy and Support pages. The app has no account registration, login or account deletion, no user-generated content shared with other users, and no paid content or in-app purchases.
 

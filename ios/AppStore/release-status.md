@@ -1,6 +1,17 @@
 # iOS App Store release status
 
-## Update — verified 2026-09-24 from App Store Connect
+## Current — verified 2026-09-24 about 23:10 SAST from App Store Connect
+
+**Version 1.0.0 build 4 was resubmitted to App Review and is Waiting for Review. It is not approved or live.**
+
+- Submission 2fc47b90-bbe9-461c-9741-acb0be1a7ea5 now shows 1.0.0 (4), Waiting for Review.
+- The App Review reply (sent 23:09 SAST) contains the six answers from review-reply-2026-09-24.md, with markdown-app-review-recording.mp4 listed under Message Attachments. The video is a 1:57 physical iPhone 16 Pro / iOS 27 recording of build 4 and is not committed.
+- The App Review Information Notes now hold the same answers, and the version was saved with build 4.
+- Build 4 was archived with Xcode 27.0 / iOS 27 SDK, uploaded at 22:56 SAST and processed by Apple. See VALIDATION.md (Build 4).
+
+The next step is Apple's decision. Approval and App Store availability must be verified separately.
+
+## Rejection — verified 2026-09-24 from App Store Connect
 
 **Version 1.0.0 build 3 is Rejected under Guideline 2.1 – Information Needed – New App Submission.** App Review's message is dated 2026-09-22 02:28. It reports no defect. Because the developer account has limited App Review history, Apple asks for a physical-device screen recording of the typical flow, starting at launch, and written answers covering purpose and audience, setup, external services, regional differences and regulated material. These go in an App Review reply and in the App Review Information Notes field.
 
