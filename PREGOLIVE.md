@@ -25,4 +25,4 @@ Developer ID certificate created through Xcode after user account sign-in. Harde
 - [x] Developer ID signature, Apple notarization (B15623FD-86E9-4CB3-84EC-5A15CFB35D01), stapled ticket, Gatekeeper acceptance and both architecture slices verified.
 - [x] Installed-app round trip, save and unchanged-bytes checks passed on Apple Silicon. Intel not runtime-tested.
 - [x] Guide checks pass; download link, version text and SHA-256 updated to 1.0.1; 1.0.0 ZIP kept at its URL.
-- [ ] Deployed through JCDS and the public ZIP's SHA-256 verified over HTTPS.
+- [x] Deployed through JCDS to host1 (102.203.81.164) at 064186d on 2026-09-24; service active, /healthz 200. Over HTTPS: the downloaded markdown-1.0.1-universal.zip has SHA-256 246e85b4c28d1a3003d172e6c4c9ee1baed1950eb85ca30c92b9399e099f4e7b, matching the published checksum; the extracted app is 1.0.1, Gatekeeper-accepted as Notarized Developer ID, stapled, with no DOMPurify 2.3.3. The 1.0.0 ZIP still answers 200. Home and support pages have no horizontal overflow at 375px.
