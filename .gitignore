@@ -1,5 +1,6 @@
 node_modules/
 build/
+build.noindex/
 .DS_Store
 .env
 .env.*
@@ -9,9 +10,6 @@ markdown.xcodeproj/
 
 ios/markdown-iOS.xcodeproj/
 ios/Resources/web/
-ios/build/
 ios/*.log
-ios/build-device/
 
-ios/build-review/
 ios/build.noindex/
