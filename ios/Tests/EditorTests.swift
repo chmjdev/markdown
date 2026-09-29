@@ -19,7 +19,7 @@ final class EditorTests: XCTestCase {
         XCTAssertTrue(app.buttons["Support"].waitForExistence(timeout: 10))
         app.buttons["Support"].tap()
         XCTAssertTrue(app.webViews.staticTexts["A little help with markdown."].waitForExistence(timeout: 60))
-        XCTAssertTrue(app.webViews.links["chmjdev@gmail.com"].exists)
+        XCTAssertTrue(app.webViews.links["hello@pltfm.ai"].exists)
         let support = XCTAttachment(screenshot: app.screenshot())
         support.name = "Support page opened from About"
         support.lifetime = .keepAlways
