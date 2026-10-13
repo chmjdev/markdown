@@ -74,3 +74,17 @@ open ios/markdown-iOS.xcodeproj
 Use the `markdown-iOS` scheme. Select your own Apple development team for signing. The project is generated from `ios/project.yml`; generated Xcode files and build output are ignored. UI checks live in `ios/Tests/EditorTests.swift`. Submission metadata and release evidence live in `ios/AppStore/`. App Store availability depends on Apple review; an uploaded build is not a released app.
 
 Both the Mac and iOS web builds go through `scripts/build-web.mjs`, which replaces TOAST UI 3.2.2's embedded DOMPurify 2.3.3 with the pinned DOMPurify 3.4.15 dependency. It fails if the expected upstream boundary or final sanitizer version changes. Review that integration when upgrading the editor. Mac 1.0.0 shipped the embedded 2.3.3; Mac 1.0.1 is the first Mac release with 3.4.15. Privacy and Support are available as native buttons in About.
+
+
+### iOS TestFlight rebuild (2026-10-13)
+
+The owner requested distribution to a limited TestFlight group. Apple already held build 4
+and reported that approved version 1.0.0 was closed to new builds, so the next candidate
+is 1.0.1 build 5. This changes native release metadata only. The signed archive built
+successfully; upload and tester-group assignment are tracked separately from installation.
+The earlier 1.0.0 build 4 remains the verified direct installation on the selected iPhone.
+
+Export using Apple’s system tools in the command environment
+(`PATH=/usr/bin:/bin:/usr/sbin:/sbin`) to avoid the Xcode packaging issue caused by mixing
+Apple openrsync and Homebrew rsync. The private distribution options set
+`testFlightInternalTestingOnly` so the artifact cannot be released externally or to the App Store.
