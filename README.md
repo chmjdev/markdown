@@ -92,3 +92,13 @@ Apple openrsync and Homebrew rsync. The private distribution options set
 Apple accepted the 1.0.1 build 5 upload on 2026-10-13 and reported that the package
 was processing. Processing completion and assignment to the owner-selected limited group
 remain separate checks; upload does not establish tester availability.
+
+### External Binteca Apps TestFlight (2026-10-13)
+
+The owner selected external testers. Apple completed processing of internal build
+1.0.1 (5), which cannot be distributed externally. Version 1.0.1 (6) was therefore
+archived, signature-verified and uploaded with `testFlightInternalTestingOnly=false`.
+Apple accepted the upload. The external `Binteca Apps` group now exists, with no
+testers and public signup disabled. An empty `Owner Build Checks` internal group
+was required by Apple before creating the external group. External Beta Review,
+tester selection and distribution remain pending; upload acceptance is not approval.
