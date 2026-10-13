@@ -88,3 +88,7 @@ Export using Apple’s system tools in the command environment
 (`PATH=/usr/bin:/bin:/usr/sbin:/sbin`) to avoid the Xcode packaging issue caused by mixing
 Apple openrsync and Homebrew rsync. The private distribution options set
 `testFlightInternalTestingOnly` so the artifact cannot be released externally or to the App Store.
+
+Apple accepted the 1.0.1 build 5 upload on 2026-10-13 and reported that the package
+was processing. Processing completion and assignment to the owner-selected limited group
+remain separate checks; upload does not establish tester availability.
