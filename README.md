@@ -102,3 +102,8 @@ Apple accepted the upload. The external `Binteca Apps` group now exists, with no
 testers and public signup disabled. An empty `Owner Build Checks` internal group
 was required by Apple before creating the external group. External Beta Review,
 tester selection and distribution remain pending; upload acceptance is not approval.
+
+Apple completed processing of 1.0.1 (6); it is assigned to the external
+`Binteca Apps` group and submitted to Beta Review. The verified portal state is
+`Waiting for Review`, with zero external testers. Apple approval and the owner's
+tester email list are still required before external installation.
