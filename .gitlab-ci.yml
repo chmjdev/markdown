@@ -1,0 +1,11 @@
+stages: [build]
+
+build:macos:
+  stage: build
+  tags: [osintdesk-macos-x64-sonoma]
+  timeout: 30m
+  script:
+    - python3 ci/macos.py
+  artifacts:
+    paths: [build/macos/]
+    expire_in: 30 days
