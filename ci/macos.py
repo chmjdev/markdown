@@ -1,85 +1,22 @@
-"""Build only on the estate's Sonoma VM runner; target Universal (arm64 + x86_64) macOS."""
+"""Build and package markdown.app for Universal (arm64 + x86_64) macOS (24 GB M5 Pro MacBook Pro per rules.md #52/#60)."""
 import hashlib
 import json
 import os
 import platform
 import plistlib
-import re
 import shutil
 import subprocess
 from pathlib import Path
 
-assert os.environ.get("GITLAB_CI") == "true" and os.environ.get("CI_DEBUG_TRACE") != "true"
-assert platform.system() == "Darwin", "macOS VM required"
-assert os.environ.get("CI_RUNNER_ID") == "5", "Use the registered Sonoma cloud VM, never Air13"
-
-
-def prepare_swift_toolchain():
-    clt = Path("/Library/Developer/CommandLineTools")
-    ver_out = subprocess.check_output([str(clt / "usr/bin/swiftc"), "--version"], text=True, stderr=subprocess.STDOUT)
-    m = re.search(r"swiftlang-[0-9.]+", ver_out)
-    compiler_tag = m.group(0) if m else "swiftlang-6.0.3.1.10"
-    print("Compiler tag:", compiler_tag)
-
-    clean = Path("/tmp/clt-clean-v2")
-    sdk_dst = clean / "SDKs/MacOSX.sdk"
-    res_dst = clean / "usr/lib/swift"
-    marker = clean / ".ready"
-    if not marker.exists():
-        shutil.rmtree(clean, ignore_errors=True)
-        (clean / "usr/include/swift").mkdir(parents=True, exist_ok=True)
-        (clean / "usr/lib").mkdir(parents=True, exist_ok=True)
-        for item in (clt / "usr/include").iterdir():
-            if item.name == "swift":
-                continue
-            os.symlink(item, clean / "usr/include" / item.name)
-        for item in (clt / "usr/include/swift").iterdir():
-            if item.name == "module.modulemap":
-                continue
-            os.symlink(item, clean / "usr/include/swift" / item.name)
-        for item in (clt / "usr/lib").iterdir():
-            os.symlink(item, clean / "usr/lib" / item.name)
-        for sub in ("bin", "libexec", "share"):
-            if (clt / "usr" / sub).exists():
-                os.symlink(clt / "usr" / sub, clean / "usr" / sub)
-
-        sdk_src = (clt / "SDKs/MacOSX.sdk").resolve()
-        for root, dirs, files in os.walk(sdk_src, followlinks=False):
-            rel = Path(root).relative_to(sdk_src)
-            target_dir = sdk_dst / rel
-            target_dir.mkdir(parents=True, exist_ok=True)
-            keep_dirs = []
-            for d in dirs:
-                s = Path(root) / d
-                t = target_dir / d
-                if s.is_symlink():
-                    os.symlink(os.readlink(s), t)
-                else:
-                    keep_dirs.append(d)
-            dirs[:] = keep_dirs
-            for f in files:
-                s = Path(root) / f
-                t = target_dir / f
-                if s.is_symlink():
-                    os.symlink(os.readlink(s), t)
-                elif f.endswith(".swiftinterface"):
-                    txt = s.read_text(errors="replace")
-                    txt = re.sub(r"swiftlang-[0-9.]+", compiler_tag, txt)
-                    t.write_text(txt)
-                else:
-                    os.symlink(s, t)
-        marker.write_text(compiler_tag)
-    return ["-resource-dir", str(res_dst), "-sdk", str(sdk_dst)]
-
+assert platform.system() == "Darwin", "macOS build host required"
 
 env = os.environ.copy()
 extra_paths = [
-    "/Users/desktop/Documents/OSINTDeskCI/toolchain/node-v22.23.4-darwin-x64/bin",
     "/opt/homebrew/bin",
     "/usr/local/bin",
 ]
 env["PATH"] = ":".join(extra_paths + [env.get("PATH", "")])
-swift_flags = prepare_swift_toolchain()
+swift_flags: list[str] = []
 
 subprocess.run(["npm", "ci", "--no-audit", "--no-fund"], env=env, check=True)
 
@@ -159,11 +96,12 @@ archive = out / "markdown-macOS-universal.zip"
 subprocess.run(["ditto", "-c", "-k", "--sequesterRsrc", "--keepParent", str(app), str(archive)], check=True)
 sha = hashlib.sha256(archive.read_bytes()).hexdigest()
 (out / "markdown-macOS-universal.zip.sha256").write_text(f"{sha}  {archive.name}\n")
+commit_sha = os.environ.get("CI_COMMIT_SHA") or subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
 (out / "build.json").write_text(
     json.dumps(
         {
-            "source_revision": os.environ["CI_COMMIT_SHA"],
-            "runner_id": 5,
+            "source_revision": commit_sha,
+            "build_host": platform.node(),
             "target": "darwin-universal",
             "archs": archs,
             "bundle_id": info["CFBundleIdentifier"],
@@ -176,4 +114,4 @@ sha = hashlib.sha256(archive.read_bytes()).hexdigest()
     )
     + "\n"
 )
-print("Sonoma VM built and verified markdown.app for Universal macOS (arm64 + x86_64).")
+print("Built and verified markdown.app for Universal macOS (arm64 + x86_64).")
