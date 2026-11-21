@@ -107,3 +107,10 @@ Apple completed processing of 1.0.1 (6); it is assigned to the external
 `Binteca Apps` group and submitted to Beta Review. The verified portal state is
 `Waiting for Review`, with zero external testers. Apple approval and the owner's
 tester email list are still required before external installation.
+
+## Security runtime update — 2026-11-21
+
+The 1.1.0 source release pins its NGINX image to upstream 1.30.7 Alpine by
+immutable digest, including the November security fixes. Build and rollout
+acceptance must use the project’s authorized Linux CI and JCDS route. A source
+change alone does not establish which image is serving.
