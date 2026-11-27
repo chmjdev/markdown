@@ -299,8 +299,12 @@ final class EditorController: UIViewController, WKScriptMessageHandler, WKNaviga
             completion?(success)
         }
     }
-    @objc func saveNow() { snapshot { [weak self] success in if success { self?.persist() } } }
+    @objc func saveNow() {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        snapshot { [weak self] success in if success { self?.persist() } }
+    }
     @objc func switchMode() {
+        UISelectionFeedbackGenerator().selectionChanged()
         let requested = mode.selectedSegmentIndex == 1
         mode.isEnabled = false
         snapshot { success in
@@ -320,6 +324,7 @@ final class EditorController: UIViewController, WKScriptMessageHandler, WKNaviga
     @objc func hideKeyboard() { view.endEditing(true); web.evaluateJavaScript("window.markdown.blur()") }
     @objc func done() {
         guard !closing else { return }
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
         closing = true
         view.isUserInteractionEnabled = false
         snapshot { success in
@@ -394,7 +399,7 @@ final class AboutController: UIViewController, SFSafariViewControllerDelegate {
             links.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             links.heightAnchor.constraint(greaterThanOrEqualToConstant: 48),
             text.topAnchor.constraint(equalTo: links.bottomAnchor),
-            text.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            text.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             text.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             text.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])

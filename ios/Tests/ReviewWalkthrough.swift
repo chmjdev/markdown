@@ -40,7 +40,9 @@ final class ReviewWalkthrough: XCTestCase {
         }
         XCTAssertTrue(onDevice.waitForExistence(timeout: 10))
         onDevice.tap()
-        let folder = app.cells.containing(.staticText, identifier: "markdown").firstMatch
+        let capitalizedFolder = app.cells.containing(.staticText, identifier: "Markdown").firstMatch
+        let lowercaseFolder = app.cells.containing(.staticText, identifier: "markdown").firstMatch
+        let folder = capitalizedFolder.exists ? capitalizedFolder : lowercaseFolder
         XCTAssertTrue(folder.waitForExistence(timeout: 10))
         folder.tap()
         pause(2)
